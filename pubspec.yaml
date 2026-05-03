@@ -91,4 +91,7 @@ flutter:
   assets:
     - assets/quiz_image.png
     - assets/profile.png
+    - assets/profile2.png
+    - assets/profile3.png
+    - assets/profile4.png
 

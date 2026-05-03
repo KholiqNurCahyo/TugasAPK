@@ -12,6 +12,7 @@ AppBar buildAppBar({
       "Quizhard",
       style: TextStyle(
         fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
     ),
 
