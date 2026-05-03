@@ -24,6 +24,13 @@ class _HasilPageState extends State<HasilPage>
   void initState() {
     super.initState();
 
+    // 🔥 AMAN DARI DIVISION BY ZERO
+    double progress =
+    widget.total == 0 ? 0 : widget.score / widget.total;
+
+    // 🔥 BIAR TIDAK LEBIH DARI 1
+    progress = progress.clamp(0.0, 1.0);
+
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -31,7 +38,7 @@ class _HasilPageState extends State<HasilPage>
 
     _animation = Tween<double>(
       begin: 0,
-      end: widget.score / widget.total,
+      end: progress,
     ).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
@@ -47,7 +54,8 @@ class _HasilPageState extends State<HasilPage>
 
   @override
   Widget build(BuildContext context) {
-    double persen = widget.score / widget.total;
+    double persen =
+    widget.total == 0 ? 0 : widget.score / widget.total;
 
     String grade;
     if (persen >= 0.8) {
@@ -90,7 +98,7 @@ class _HasilPageState extends State<HasilPage>
 
                   const SizedBox(height: 10),
 
-                  // 🔥 SCORE BESAR
+                  // 🔥 SCORE
                   Text(
                     "${widget.score}/${widget.total}",
                     style: const TextStyle(
@@ -102,7 +110,7 @@ class _HasilPageState extends State<HasilPage>
 
                   const SizedBox(height: 25),
 
-                  // 🔥 PROGRESS ANIMATION
+                  // 🔥 PROGRESS
                   AnimatedBuilder(
                     animation: _animation,
                     builder: (context, child) {
@@ -116,9 +124,8 @@ class _HasilPageState extends State<HasilPage>
                               value: _animation.value,
                               strokeWidth: 10,
                               backgroundColor: Colors.white24,
-                              valueColor: const AlwaysStoppedAnimation(
-                                Colors.cyan,
-                              ),
+                              valueColor:
+                              const AlwaysStoppedAnimation(Colors.cyan),
                             ),
                           ),
                           Text(
@@ -136,12 +143,13 @@ class _HasilPageState extends State<HasilPage>
 
                   const SizedBox(height: 30),
 
-                  // 🔥 CARD MODERN
+                  // 🔥 CARD
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      // 🔥 FIX withOpacity
+                      color: Colors.white.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: Colors.white24),
                     ),
@@ -159,7 +167,7 @@ class _HasilPageState extends State<HasilPage>
                         Text(
                           "Kerja bagus! Terus tingkatkan 🚀",
                           style: TextStyle(
-                            color: Colors.white.withOpacity(0.7),
+                            color: Colors.white.withValues(alpha: 0.7),
                           ),
                         ),
                       ],
@@ -168,7 +176,7 @@ class _HasilPageState extends State<HasilPage>
 
                   const SizedBox(height: 40),
 
-                  // 🔥 BUTTON MAIN LAGI
+                  // 🔥 BUTTON
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -200,7 +208,6 @@ class _HasilPageState extends State<HasilPage>
 
                   const SizedBox(height: 10),
 
-                  // 🔙 KEMBALI
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
