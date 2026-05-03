@@ -90,3 +90,5 @@ flutter:
 
   assets:
     - assets/quiz_image.png
+    - assets/profile.png
+

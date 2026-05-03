@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'screens/home_page.dart';
+import 'pages/main_page.dart';
 
-class MyStoreApp extends StatelessWidget {
-  const MyStoreApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Quizhard',
       debugShowCheckedModeBanner: false,
-      title: 'Quizz',
+
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
-        useMaterial3: true,
+        primaryColor: const Color(0xFF23206F),
+        scaffoldBackgroundColor: const Color(0xFF23206F),
+        fontFamily: 'Roboto',
       ),
-      home: const HomePage(),
+
+      home: const MainPage(),
     );
   }
 }
